@@ -1,69 +1,272 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { Container } from '@/components/layout/Container';
+import { Button } from '@/components/ui/Button';
+import { ServiceCard } from '@/components/cards/ServiceCard';
+import { DynamicIcon } from '@/components/ui/DynamicIcon';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/Accordion';
+import { siteConfig } from '@/config/site';
+import { services } from '@/content/services';
+import { processSteps } from '@/content/process';
+import { faqs } from '@/content/faq';
+import { valuePrinciples } from '@/content/values';
+import { formatPhoneLink } from '@/lib/utils';
+import {
+  Phone,
+  Clock,
+  Shield,
+  Users,
+  ArrowRight,
+} from 'lucide-react';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="bg-white py-16 md:py-20 lg:py-24" aria-label="Introduction">
+        <Container>
+          <div className="max-w-3xl">
+            <h1 className="font-display text-3xl md:text-4xl lg:text-[48px] font-semibold text-neutral-900 leading-tight tracking-tight">
+              Clear guidance when your family needs it most
+            </h1>
+            <p className="mt-6 text-lg md:text-xl text-neutral-700 leading-relaxed max-w-2xl">
+              {siteConfig.description}
+            </p>
+
+            {/* Trust signals — inline */}
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-600">
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-primary-500" aria-hidden="true" />
+                {siteConfig.hours.display}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Shield className="w-4 h-4 text-primary-500" aria-hidden="true" />
+                Professional coordination
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-primary-500" aria-hidden="true" />
+                Experienced team
+              </span>
+            </div>
+
+            {/* CTAs */}
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Link href="/booking">
+                <Button size="lg">
+                  Get immediate assistance
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button variant="secondary" size="lg">
+                  Explore our services
+                </Button>
+              </Link>
+            </div>
+
+            {/* Phone CTA */}
+            {siteConfig.contact.phone && (
+              <p className="mt-4 text-sm text-neutral-600">
+                Or call us directly:{' '}
+                <a
+                  href={formatPhoneLink(siteConfig.contact.phone)}
+                  className="text-primary-500 font-medium hover:text-primary-700 transition-colors"
+                >
+                  {siteConfig.contact.phoneDisplay}
+                </a>
+              </p>
+            )}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Trust strip ──────────────────────────────────── */}
+      <section className="bg-primary-100 py-6 border-y border-primary-200" aria-label="Why choose us">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
+            {[
+              { icon: Clock, text: 'Available 24/7' },
+              { icon: Phone, text: 'Immediate response' },
+              { icon: Shield, text: 'Transparent process' },
+              { icon: Users, text: 'Experienced team' },
+            ].map(({ icon: Icon, text }) => (
+              <div key={text} className="flex flex-col items-center gap-2 py-2">
+                <Icon className="w-5 h-5 text-primary-700" aria-hidden="true" />
+                <span className="text-sm font-medium text-primary-900">{text}</span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Services ─────────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-white" aria-labelledby="services-heading">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 id="services-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
+              Complete funeral and cremation services
+            </h2>
+            <p className="mt-4 text-base text-neutral-700 leading-relaxed">
+              From initial coordination to post-funeral support, we provide every
+              service your family may need during a difficult time.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── How it works ─────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-neutral-50" aria-labelledby="process-heading">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 id="process-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
+              How we help your family
+            </h2>
+            <p className="mt-4 text-base text-neutral-700 leading-relaxed">
+              A simple, guided process so you know exactly what to expect at every step.
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <ol className="relative space-y-0">
+              {processSteps.map((step, index) => (
+                <li key={step.step} className="relative flex gap-6 pb-10 last:pb-0">
+                  {/* Connecting line */}
+                  {index < processSteps.length - 1 && (
+                    <div className="absolute left-5 top-12 w-px h-[calc(100%-32px)] bg-primary-200" aria-hidden="true" />
+                  )}
+                  {/* Step number / icon */}
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white shrink-0 z-10">
+                    <DynamicIcon name={step.icon} className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="font-display text-lg font-semibold text-neutral-900">
+                      {step.title}
+                    </h3>
+                    <p className="mt-1 text-base text-neutral-700 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── What families value ───────────────────────────── */}
+      <section className="py-16 md:py-20 bg-white" aria-labelledby="values-heading">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 id="values-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
+              What families value
+            </h2>
+            <p className="mt-4 text-base text-neutral-700 leading-relaxed">
+              The principles that guide every interaction with every family we serve.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {valuePrinciples.map((principle) => (
+              <div
+                key={principle.id}
+                className="bg-secondary-200 rounded-md p-6"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center justify-center w-9 h-9 rounded-full bg-secondary-700/20 text-secondary-700">
+                    <DynamicIcon name={principle.icon} className="w-4.5 h-4.5" aria-hidden="true" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-neutral-900">
+                    {principle.title}
+                  </h3>
+                </div>
+                <p className="text-base text-neutral-700 leading-relaxed">
+                  {principle.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── FAQ preview ──────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-neutral-50" aria-labelledby="faq-heading">
+        <Container>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 id="faq-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
+                Frequently asked questions
+              </h2>
+            </div>
+            <Accordion type="single" collapsible>
+              {faqs.slice(0, 5).map((faq) => (
+                <AccordionItem key={faq.id} value={faq.id}>
+                  <AccordionTrigger>{faq.question}</AccordionTrigger>
+                  <AccordionContent>{faq.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+            <div className="text-center mt-8">
+              <Link href="/faq">
+                <Button variant="secondary" size="md">
+                  View all questions
+                  <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Final CTA ────────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-primary-900 text-white" aria-labelledby="cta-heading">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 id="cta-heading" className="font-display text-2xl md:text-3xl font-semibold text-white">
+              We are here when you need us
+            </h2>
+            <p className="mt-4 text-base text-primary-300 leading-relaxed">
+              Our team is available around the clock to provide guidance and support.
+              Reach out whenever your family needs assistance.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+              <Link href="/booking">
+                <Button
+                  size="lg"
+                  className="bg-white text-primary-900 hover:bg-neutral-100 hover:text-primary-900"
+                >
+                  Get assistance now
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="text-white border-primary-300 hover:bg-primary-700 hover:text-white"
+                >
+                  Contact us
+                </Button>
+              </Link>
+            </div>
+            {siteConfig.contact.phone && (
+              <p className="mt-6 text-sm text-primary-300">
+                Call directly:{' '}
+                <a
+                  href={formatPhoneLink(siteConfig.contact.phone)}
+                  className="text-white font-medium hover:underline"
+                >
+                  {siteConfig.contact.phoneDisplay}
+                </a>
+              </p>
+            )}
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }
