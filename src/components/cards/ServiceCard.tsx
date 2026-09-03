@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Service } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { DynamicIcon } from '@/components/ui/DynamicIcon';
-import { Check } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ServiceCardProps {
@@ -16,46 +16,49 @@ export function ServiceCard({ service, showBookCTA = true, className }: ServiceC
     <article
       id={service.slug}
       className={cn(
-        'bg-white border border-neutral-200 rounded-md p-6 transition-all duration-150',
-        'hover:shadow-md hover:-translate-y-0.5',
+        'group flex h-full flex-col border-t border-neutral-300 pt-5 transition-colors duration-200',
+        'hover:border-primary-500',
         className,
       )}
     >
-      <div className="flex items-center gap-3 mb-4">
-        <div className="flex items-center justify-center w-10 h-10 rounded-md bg-primary-100 text-primary-500">
-          <DynamicIcon name={service.icon} className="w-5 h-5" aria-hidden="true" />
+      <div className="flex items-start justify-between gap-5">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-50 text-primary-700">
+          <DynamicIcon name={service.icon} className="h-4 w-4" aria-hidden="true" />
         </div>
-        <h3 className="font-display text-xl font-semibold text-neutral-900">
-          {service.name}
-        </h3>
+        <span className="font-mono text-[10px] tracking-[0.12em] text-neutral-500" aria-hidden="true">
+          SERVICE
+        </span>
       </div>
 
-      <p className="text-base text-neutral-700 leading-relaxed mb-4">
+      <h3 className="mt-6 font-display text-[24px] font-semibold leading-tight text-neutral-900">
+        {service.name}
+      </h3>
+
+      <p className="mt-3 text-[15px] leading-7 text-neutral-700">
         {service.shortDescription}
       </p>
 
       {service.features && (
-        <ul className="mb-6 space-y-1.5">
+        <ul className="mt-5 space-y-2">
           {service.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-2 text-sm text-neutral-700">
-              <Check className="w-4 h-4 text-success-600 mt-0.5 shrink-0" aria-hidden="true" />
+            <li key={feature} className="flex items-start gap-2 text-[13px] leading-5 text-neutral-600">
+              <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary-500" aria-hidden="true" />
               {feature}
             </li>
           ))}
         </ul>
       )}
 
-      <div className="flex flex-wrap gap-3 mt-auto">
+      <div className="mt-auto flex flex-wrap items-center gap-4 pt-7">
         <Link href={`/services#${service.slug}`}>
           <Button variant="secondary" size="sm">
             Learn more
+            <ArrowUpRight className="ml-1 h-3.5 w-3.5" aria-hidden="true" />
           </Button>
         </Link>
         {showBookCTA && (
-          <Link href="/booking">
-            <Button variant="primary" size="sm">
-              Request service
-            </Button>
+          <Link href="/booking" className="text-sm font-semibold text-primary-900 hover:text-primary-500">
+            Request service
           </Link>
         )}
       </div>
