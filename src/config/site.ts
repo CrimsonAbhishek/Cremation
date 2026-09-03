@@ -9,20 +9,21 @@
  */
 
 export const siteConfig = {
-  /** Replace with actual company name */
+  /** Company name */
   companyName: 'Cremation Services',
 
-  /** Replace with actual tagline */
-  tagline: 'Dignified care when your family needs it most',
+  /** Tagline */
+  tagline: 'Funeral and cremation services, handled with care',
 
-  /** Replace with actual description */
+  /** Description */
   description:
-    'Complete cremation and funeral assistance with compassionate, professional support available around the clock.',
+    'We take care of every arrangement — transportation, cremation, rituals, and post-funeral support — so your family can focus on being together.',
 
-  /** Contact details — all placeholders until real info is provided */
+  /** Contact details — placeholders until real info is provided */
   contact: {
     phone: '+91-XXXX-XXXXXX',
     phoneDisplay: '+91 XXXX XXXXXX',
+    phoneDisplayWithHours: '+91 XXXX XXXXXX — 24/7',
     email: 'contact@example.com',
     whatsapp: '', // WhatsApp number — leave empty to hide WhatsApp CTA
     address: '[Address to be provided]',
@@ -30,7 +31,7 @@ export const siteConfig = {
 
   /** Operating hours */
   hours: {
-    display: 'Available 24/7',
+    display: 'Available any hour',
     isAlwaysAvailable: true,
   },
 
@@ -57,9 +58,9 @@ export const siteConfig = {
     pricingEnabled: false,
   },
 
-  /** SEO — do not fabricate business details */
+  /** SEO */
   seo: {
-    siteUrl: 'https://example.com',
+    siteUrl: 'https://cremation-virid.vercel.app',
     locale: 'en_IN',
     type: 'website' as const,
   },

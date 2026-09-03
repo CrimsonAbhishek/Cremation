@@ -28,7 +28,7 @@ const STEP_LABELS = [
   'Contact',
   'Services',
   'Location',
-  'Deceased Info',
+  'Details',
   'Review',
 ];
 
@@ -150,44 +150,42 @@ export function BookingForm() {
       setSubmissionResult(res);
       localStorage.removeItem(LOCAL_STORAGE_KEY);
     } catch {
-      setErrorMsg('Failed to submit booking request. Please try calling directly.');
+      setErrorMsg(`We weren't able to send your request. Please try again — or call us directly at ${siteConfig.contact.phoneDisplay}.`);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // ── CONFIRMATION SCREEN ───────────────────────────────────
+  // ── CONFIRMATION STATE ────────────────────────────────────
   if (submissionResult) {
     return (
       <div className="bg-white p-6 md:p-8 border border-neutral-200 rounded-md max-w-2xl mx-auto shadow-sm">
         <div className="flex items-center gap-3 text-success-600 mb-4">
           <CheckCircle2 className="w-8 h-8 shrink-0" aria-hidden="true" />
           <h2 className="font-display text-2xl font-semibold text-neutral-900">
-            Booking Request Submitted
+            Your request has been received
           </h2>
         </div>
 
-        <div className="p-4 bg-neutral-100 rounded-sm mb-6 font-mono text-sm">
-          <span className="text-neutral-600 block text-xs font-sans uppercase tracking-wide mb-1">Request Reference Number</span>
+        <p className="text-base text-neutral-800 leading-relaxed mb-6">
+          Thank you, <strong>{submissionResult.data.contactName}</strong>. Our team will call you at <strong>{submissionResult.data.contactPhone}</strong> within the next few minutes. If you don&apos;t hear from us within 10 minutes, call us directly at{' '}
+          <a href={formatPhoneLink(siteConfig.contact.phone)} className="font-semibold underline">
+            {siteConfig.contact.phoneDisplay}
+          </a>.
+        </p>
+
+        <div className="p-4 bg-neutral-100 rounded-sm mb-4 font-mono text-sm">
+          <span className="text-neutral-600 block text-xs font-sans uppercase tracking-wide mb-1">Your Reference Number</span>
           <span className="text-lg font-bold text-primary-900">{submissionResult.referenceNumber}</span>
         </div>
 
-        <div className="p-4 bg-warning-100 border-l-4 border-warning-600 rounded-r-sm text-sm text-neutral-800 mb-6">
-          <strong>Important Note:</strong> This is a booking <em>request</em>. A specific cremation slot or vehicle is NOT reserved until our team speaks with you directly by phone to confirm details and timing.
-        </div>
-
-        <div className="space-y-4 text-sm text-neutral-700 leading-relaxed mb-8">
-          <h3 className="font-semibold text-base text-neutral-900 font-display">What Happens Next:</h3>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>Our team will call you at <strong>{submissionResult.data.contactPhone}</strong> shortly.</li>
-            <li>We will confirm your location, required services, and preferred schedule.</li>
-            <li>Once confirmed, dedicated coordinators will handle all arrangements.</li>
-          </ol>
-        </div>
+        <p className="text-xs text-neutral-600 mb-6">
+          Keep this number — you can use it if you call us or need to follow up.
+        </p>
 
         {siteConfig.contact.phone && (
           <div className="p-4 bg-primary-100 rounded-md text-center">
-            <p className="text-sm text-primary-900 font-medium mb-2">Need immediate confirmation?</p>
+            <p className="text-sm text-primary-900 font-medium mb-2">Need immediate assistance?</p>
             <a
               href={formatPhoneLink(siteConfig.contact.phone)}
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-xs text-sm font-semibold hover:bg-primary-700 transition-colors"
@@ -212,17 +210,18 @@ export function BookingForm() {
         </div>
       )}
 
-      {/* ── STEP 1: CONTACT & URGENCY ────────────────────────── */}
+      {/* ── STEP 1: CONTACT ─────────────────────────────────── */}
       {step === 1 && (
         <form onSubmit={handleNextStep1} className="space-y-6">
           <div className="border-b border-neutral-200 pb-4 mb-4">
-            <h2 className="font-display text-xl font-semibold text-neutral-900">Step 1: Contact & Urgency</h2>
-            <p className="text-xs text-neutral-600 mt-1">Provide your contact details so we can reach you immediately.</p>
+            <p className="text-sm text-neutral-700">
+              Fill in your details and we&apos;ll call you back immediately. All fields marked <span className="text-error-600">*</span> are required.
+            </p>
           </div>
 
           <fieldset className="border border-neutral-300 rounded-sm p-4">
             <legend className="text-sm font-semibold text-neutral-900 px-2 font-body">
-              How soon do you need assistance? <span className="text-error-600">*</span>
+              How soon do you need help? <span className="text-error-600">*</span>
             </legend>
             <div className="space-y-2 mt-2">
               <label className="flex items-center gap-3 text-sm text-neutral-900 cursor-pointer min-h-[36px]">
@@ -232,7 +231,7 @@ export function BookingForm() {
                   {...formStep1.register('urgency')}
                   className="w-4 h-4 text-primary-500"
                 />
-                Emergency (Immediate assistance within hours)
+                Emergency — I need help now
               </label>
               <label className="flex items-center gap-3 text-sm text-neutral-900 cursor-pointer min-h-[36px]">
                 <input
@@ -241,7 +240,7 @@ export function BookingForm() {
                   {...formStep1.register('urgency')}
                   className="w-4 h-4 text-primary-500"
                 />
-                Today (Within 24 hours)
+                Today — within the next 24 hours
               </label>
               <label className="flex items-center gap-3 text-sm text-neutral-900 cursor-pointer min-h-[36px]">
                 <input
@@ -250,7 +249,7 @@ export function BookingForm() {
                   {...formStep1.register('urgency')}
                   className="w-4 h-4 text-primary-500"
                 />
-                Schedule for later / Planning
+                Planning ahead — no immediate urgency
               </label>
             </div>
             {formStep1.formState.errors.urgency && (
@@ -258,37 +257,37 @@ export function BookingForm() {
             )}
           </fieldset>
 
-          <FormField label="Your Full Name" htmlFor="contactName" required error={formStep1.formState.errors.contactName?.message}>
+          <FormField label="Your name" htmlFor="contactName" required error={formStep1.formState.errors.contactName?.message}>
             <Input id="contactName" {...formStep1.register('contactName')} placeholder="Enter your full name" error={!!formStep1.formState.errors.contactName} />
           </FormField>
 
-          <FormField label="Phone Number" htmlFor="contactPhone" required error={formStep1.formState.errors.contactPhone?.message} helperText="10-digit mobile number for immediate callback">
+          <FormField label="Mobile number" htmlFor="contactPhone" required error={formStep1.formState.errors.contactPhone?.message} helperText="We'll call this number to confirm your booking">
             <Input id="contactPhone" type="tel" {...formStep1.register('contactPhone')} placeholder="9876543210" error={!!formStep1.formState.errors.contactPhone} />
           </FormField>
 
-          <FormField label="Your Relation to Deceased" htmlFor="contactRelation" required error={formStep1.formState.errors.contactRelation?.message}>
+          <FormField label="Your relation to the deceased" htmlFor="contactRelation" required error={formStep1.formState.errors.contactRelation?.message}>
             <Input id="contactRelation" {...formStep1.register('contactRelation')} placeholder="e.g. Son, Daughter, Spouse, Relative" error={!!formStep1.formState.errors.contactRelation} />
           </FormField>
 
-          <FormField label="Email Address (Optional)" htmlFor="contactEmail" error={formStep1.formState.errors.contactEmail?.message}>
+          <FormField label="Email address (optional)" htmlFor="contactEmail" error={formStep1.formState.errors.contactEmail?.message}>
             <Input id="contactEmail" type="email" {...formStep1.register('contactEmail')} placeholder="yourname@example.com" error={!!formStep1.formState.errors.contactEmail} />
           </FormField>
 
           <div className="flex justify-end pt-4">
             <Button type="submit" size="lg">
-              Next: Select Services
+              Continue to services
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </form>
       )}
 
-      {/* ── STEP 2: SERVICE SELECTION ────────────────────────── */}
+      {/* ── STEP 2: SERVICES ────────────────────────────────── */}
       {step === 2 && (
         <form onSubmit={handleNextStep2} className="space-y-6">
           <div className="border-b border-neutral-200 pb-4 mb-4">
-            <h2 className="font-display text-xl font-semibold text-neutral-900">Step 2: Service Selection</h2>
-            <p className="text-xs text-neutral-600 mt-1">Select one or more services required.</p>
+            <h2 className="font-display text-xl font-semibold text-neutral-900">What does your family need?</h2>
+            <p className="text-xs text-neutral-600 mt-1">Select everything that applies. You can adjust later.</p>
           </div>
 
           <fieldset>
@@ -323,35 +322,35 @@ export function BookingForm() {
               Back
             </Button>
             <Button type="submit" size="lg">
-              Next: Location & Timing
+              Continue to location details
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </form>
       )}
 
-      {/* ── STEP 3: LOCATION & TIMING ────────────────────────── */}
+      {/* ── STEP 3: LOCATION ────────────────────────────────── */}
       {step === 3 && (
         <form onSubmit={handleNextStep3} className="space-y-6">
           <div className="border-b border-neutral-200 pb-4 mb-4">
-            <h2 className="font-display text-xl font-semibold text-neutral-900">Step 3: Location & Timing</h2>
+            <h2 className="font-display text-xl font-semibold text-neutral-900">Where do you need us?</h2>
             <p className="text-xs text-neutral-600 mt-1">Specify where and when services are needed.</p>
           </div>
 
-          <FormField label="Current Location of Deceased" htmlFor="locationOfDeceased" required error={formStep3.formState.errors.locationOfDeceased?.message} helperText="Home address, hospital name, or city location">
-            <Input id="locationOfDeceased" {...formStep3.register('locationOfDeceased')} placeholder="e.g. City Hospital, Ward 4 OR Residential Address" error={!!formStep3.formState.errors.locationOfDeceased} />
+          <FormField label="Current location of the deceased" htmlFor="locationOfDeceased" required error={formStep3.formState.errors.locationOfDeceased?.message} helperText="Home address, hospital name, or mortuary">
+            <Input id="locationOfDeceased" {...formStep3.register('locationOfDeceased')} placeholder="e.g. City Hospital, Ward 4 OR Home Address" error={!!formStep3.formState.errors.locationOfDeceased} />
           </FormField>
 
-          <FormField label="Preferred Cremation Location / Facility (Optional)" htmlFor="preferredLocation">
-            <Input id="preferredLocation" {...formStep3.register('preferredLocation')} placeholder="Specific cremation ground or facility if known" />
+          <FormField label="Cremation ground or destination (if known — we can help if not)" htmlFor="preferredLocation">
+            <Input id="preferredLocation" {...formStep3.register('preferredLocation')} placeholder="Specific facility or cremation ground if known" />
           </FormField>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <FormField label="Preferred Date (Optional)" htmlFor="preferredDate">
+            <FormField label="Preferred date (if known)" htmlFor="preferredDate">
               <Input id="preferredDate" type="date" {...formStep3.register('preferredDate')} />
             </FormField>
 
-            <FormField label="Preferred Time Slot (Optional)" htmlFor="preferredTime">
+            <FormField label="Preferred time (if known)" htmlFor="preferredTime">
               <Input id="preferredTime" type="time" {...formStep3.register('preferredTime')} />
             </FormField>
           </div>
@@ -362,31 +361,31 @@ export function BookingForm() {
               Back
             </Button>
             <Button type="submit" size="lg">
-              Next: Deceased Information
+              Continue to details
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </form>
       )}
 
-      {/* ── STEP 4: DECEASED INFORMATION ───────────────────── */}
+      {/* ── STEP 4: DETAILS ─────────────────────────────────── */}
       {step === 4 && (
         <form onSubmit={handleNextStep4} className="space-y-6">
           <div className="border-b border-neutral-200 pb-4 mb-4">
-            <h2 className="font-display text-xl font-semibold text-neutral-900">Step 4: Deceased Information</h2>
-            <p className="text-xs text-neutral-600 mt-1">Details to assist in smooth coordination.</p>
+            <h2 className="font-display text-xl font-semibold text-neutral-900">A few more details</h2>
+            <p className="text-xs text-neutral-600 mt-1">This information helps us prepare appropriately and assign the right coordinator.</p>
           </div>
 
-          <FormField label="Deceased Full Name" htmlFor="deceasedName" required error={formStep4.formState.errors.deceasedName?.message}>
+          <FormField label="Name of the deceased" htmlFor="deceasedName" required error={formStep4.formState.errors.deceasedName?.message}>
             <Input id="deceasedName" {...formStep4.register('deceasedName')} placeholder="Full name of the deceased" error={!!formStep4.formState.errors.deceasedName} />
           </FormField>
 
-          <FormField label="Age of Deceased (Optional)" htmlFor="deceasedAge" error={formStep4.formState.errors.deceasedAge?.message}>
+          <FormField label="Age at time of passing (optional)" htmlFor="deceasedAge" error={formStep4.formState.errors.deceasedAge?.message}>
             <Input id="deceasedAge" type="number" {...formStep4.register('deceasedAge')} placeholder="Age in years" />
           </FormField>
 
-          <FormField label="Special Requirements or Ritual Guidelines (Optional)" htmlFor="specialRequirements">
-            <Textarea id="specialRequirements" {...formStep4.register('specialRequirements')} placeholder="Any specific religious observances, pujari preferences, or material requirements..." />
+          <FormField label="Religious tradition or special requirements (optional)" htmlFor="specialRequirements">
+            <Textarea id="specialRequirements" {...formStep4.register('specialRequirements')} placeholder="Any specific religious observances, pujari preferences, or ritual requirements..." />
           </FormField>
 
           <div className="flex justify-between pt-4">
@@ -395,19 +394,19 @@ export function BookingForm() {
               Back
             </Button>
             <Button type="submit" size="lg">
-              Review Request
+              Review your request
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </form>
       )}
 
-      {/* ── STEP 5: REVIEW & SUBMIT ──────────────────────────── */}
+      {/* ── STEP 5: REVIEW ──────────────────────────────────── */}
       {step === 5 && (
         <div className="space-y-6">
           <div className="border-b border-neutral-200 pb-4 mb-4">
-            <h2 className="font-display text-xl font-semibold text-neutral-900">Step 5: Review Booking Request</h2>
-            <p className="text-xs text-neutral-600 mt-1">Please review all information before submitting your request.</p>
+            <h2 className="font-display text-xl font-semibold text-neutral-900">Review your request</h2>
+            <p className="text-xs text-neutral-600 mt-1">Please check the details below before submitting. Our team will call you immediately after receiving your request.</p>
           </div>
 
           <div className="bg-neutral-50 p-4 rounded-sm border border-neutral-200 space-y-4 text-sm">
@@ -435,7 +434,7 @@ export function BookingForm() {
             <div>
               <span className="font-semibold text-neutral-900 block text-xs uppercase tracking-wide">Location of Deceased</span>
               <p>{formData.locationOfDeceased}</p>
-              {formData.preferredLocation && <p className="text-neutral-600">Preferred Facility: {formData.preferredLocation}</p>}
+              {formData.preferredLocation && <p className="text-neutral-600">Preferred Destination: {formData.preferredLocation}</p>}
             </div>
 
             <div>
@@ -453,10 +452,10 @@ export function BookingForm() {
           <div className="flex justify-between pt-4">
             <Button type="button" variant="ghost" onClick={() => setStep(4)} disabled={isSubmitting}>
               <ArrowLeft className="w-4 h-4 mr-1" />
-              Edit Details
+              Edit details
             </Button>
             <Button type="button" size="lg" onClick={handleFinalSubmit} isLoading={isSubmitting}>
-              Submit Booking Request
+              Submit request — we&apos;ll call you immediately
             </Button>
           </div>
         </div>

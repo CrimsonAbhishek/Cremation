@@ -9,9 +9,12 @@ import {
   AccordionContent,
 } from '@/components/ui/Accordion';
 import { faqs } from '@/content/faq';
+import { siteConfig } from '@/config/site';
+import { formatPhoneLink } from '@/lib/utils';
+import { Phone } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions',
+  title: 'Common Questions',
   description: 'Find answers to common questions about cremation processes, documentation, transport, timing, and ritual arrangements.',
 };
 
@@ -22,10 +25,10 @@ export default function FAQPage() {
         <Container>
           <div className="max-w-2xl">
             <h1 id="faq-page-heading" className="font-display text-3xl md:text-4xl font-semibold text-neutral-900">
-              Frequently asked questions
+              Common questions
             </h1>
             <p className="mt-4 text-lg text-neutral-700 leading-relaxed">
-              Find clear answers to common questions regarding our services, procedures, required documents, and arrangements.
+              If you have a question that isn&apos;t answered here, call us directly — we&apos;re available 24/7.
             </p>
           </div>
         </Container>
@@ -48,11 +51,21 @@ export default function FAQPage() {
                 Have a question not answered here?
               </h2>
               <p className="text-neutral-700 mb-6">
-                Our support team is available 24/7 to provide personal assistance.
+                Our team is available 24/7 to answer your questions and assist with arrangements.
               </p>
-              <Link href="/contact">
-                <Button size="md">Contact our team</Button>
-              </Link>
+              <div className="flex flex-wrap gap-4 justify-center">
+                {siteConfig.contact.phone && (
+                  <a href={formatPhoneLink(siteConfig.contact.phone)}>
+                    <Button size="md">
+                      <Phone className="w-4 h-4 mr-2 inline" />
+                      Call {siteConfig.contact.phoneDisplay}
+                    </Button>
+                  </a>
+                )}
+                <Link href="/contact">
+                  <Button variant="secondary" size="md">Send a message</Button>
+                </Link>
+              </div>
             </div>
           </div>
         </Container>

@@ -1,41 +1,36 @@
 import type { ValuePrinciple } from '@/types';
 
 /**
- * "What families value" — not testimonials.
- *
- * These are principles that represent the service's values,
- * not attributed quotes from specific individuals.
- * When verified testimonials are available, use the
- * TestimonialCard component with real, attributed content.
+ * "How we work" — principles guiding our service to families.
  */
 
 export const valuePrinciples: ValuePrinciple[] = [
   {
     id: 'value-availability',
-    title: 'Always available',
+    title: 'Available any hour',
     description:
-      'Families need support at any hour. A reliable service is one that answers the phone at 2 AM with the same compassion as at 2 PM.',
+      'We answer at 2 AM. Someone who knows what they’re doing picks up, understands your situation, and begins coordinating immediately.',
     icon: 'Clock',
   },
   {
     id: 'value-guidance',
-    title: 'Clear guidance',
+    title: 'No guesswork',
     description:
-      'During a difficult time, families need someone who explains each step clearly, answers every question, and removes uncertainty from the process.',
+      'We tell you what happens next, what it costs, and what you need to do — clearly, at every step.',
     icon: 'Compass',
   },
   {
     id: 'value-dignity',
-    title: 'Dignity in every detail',
+    title: 'Respectful throughout',
     description:
-      'Every aspect of the process — from transportation to the final rites — should be handled with the same care and respect a family would give.',
+      'Every person involved in your family’s arrangements is experienced, professional, and understands the weight of what they’re doing.',
     icon: 'Heart',
   },
   {
     id: 'value-transparency',
-    title: 'Honest and transparent',
+    title: 'No hidden costs',
     description:
-      'No hidden costs, no unexpected changes, no pressure. Families deserve straightforward communication about services, process, and pricing.',
+      'We give you a clear picture of what services will cost before anything is confirmed. Nothing is added without your knowledge.',
     icon: 'Eye',
   },
 ];

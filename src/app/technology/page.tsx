@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Lightbulb, Cog, FlaskConical, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Our Approach',
+  title: 'Why We Work This Way',
   description: 'Learn about our professional approach to cremation and funeral services.',
 };
 

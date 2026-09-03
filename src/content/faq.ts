@@ -5,70 +5,70 @@ export const faqs: FAQ[] = [
     id: 'faq-availability',
     question: 'Are your services available 24/7?',
     answer:
-      'Yes, our team is available around the clock, every day of the year. We understand that the need for assistance can arise at any time. You can reach us by phone or through our website at any hour.',
+      'Yes. Our team is available at any hour of the day or night. Call us directly for immediate assistance — someone will answer and begin coordinating within minutes.',
     category: 'general',
-  },
-  {
-    id: 'faq-documents',
-    question: 'What documents are required for cremation?',
-    answer:
-      'The specific documents required may vary by location and circumstances. Generally, a death certificate (or hospital documentation) and identification of the deceased are needed. Our team will guide you through exactly what is required and can assist with documentation.',
-    category: 'process',
   },
   {
     id: 'faq-how-long',
     question: 'How quickly can arrangements be made?',
     answer:
-      'For urgent situations, we can begin coordination within hours of your initial contact. For planned arrangements, we work with your preferred timeline. Our team will discuss timing during your first conversation with us.',
+      'For emergency situations, we can have transportation in place within the hour and coordinate cremation on the same day in most cities. For planned arrangements, we work around your family’s schedule.',
     category: 'process',
   },
   {
     id: 'faq-religion',
     question: 'Do you accommodate different religious and cultural traditions?',
     answer:
-      'Yes, we provide services that respect and accommodate various religious and cultural traditions. Our team is experienced in coordinating arrangements according to Hindu, Muslim, Christian, Sikh, and other faith traditions. Please let us know your requirements during booking.',
+      'Yes. We work with families across Hindu, Sikh, Christian, Muslim, Buddhist, and other traditions. Tell us your requirements when you reach out and we will arrange accordingly.',
     category: 'general',
+  },
+  {
+    id: 'faq-documents',
+    question: 'What documents are required for cremation?',
+    answer:
+      'Requirements vary depending on the city and circumstances, but the most common documents are: a death certificate or doctor’s declaration, and the identity documents of the family member authorising the cremation. Our team will tell you exactly what is needed based on your location and situation when you reach out.',
+    category: 'process',
   },
   {
     id: 'faq-cost',
     question: 'How are costs communicated?',
     answer:
-      'We believe in transparent communication about costs. After understanding your requirements, we provide a clear estimate before proceeding. There are no hidden charges. You can discuss pricing during your initial consultation.',
+      'We give you a clear cost estimate before confirming any service. There are no hidden charges. If anything changes — such as an additional distance or a specific ritual requirement — we will tell you before proceeding, not after.',
     category: 'pricing',
   },
   {
     id: 'faq-location',
     question: 'Can you arrange services at a specific location?',
     answer:
-      'We coordinate services across multiple locations and can work with your preferred cremation ground or funeral venue. If you have a specific location in mind, our team will check availability and make the necessary arrangements.',
+      'Yes. We can coordinate at home, hospital, cremation ground, or prayer venue — wherever your family needs us. Tell us the location when you make your request.',
     category: 'process',
   },
   {
     id: 'faq-transport',
     question: 'Do you provide transportation for the deceased?',
     answer:
-      'Yes, we offer complete transportation services including hearse and ambulance. We can arrange pickup from hospitals, homes, or other locations and transport to the cremation ground or funeral venue.',
+      'Yes. We provide hearse and ambulance services for transportation from home, hospital, or mortuary to the cremation ground or funeral venue. Available 24/7.',
     category: 'services',
   },
   {
     id: 'faq-post-funeral',
     question: 'Do you assist with post-funeral rituals?',
     answer:
-      'Yes, we can coordinate post-funeral services including asthi visarjan (immersion of ashes), prayer arrangements, and other traditional observances. Our team can guide you through these processes.',
+      'Yes. We assist with asthi visarjan (immersion of ashes at a sacred river like Haridwar, Prayagraj, or Varanasi), chautha, terahvi, shraddh, and prayer meetings. Tell us what your family needs and we’ll coordinate accordingly.',
     category: 'services',
   },
   {
     id: 'faq-freezer',
     question: 'What if we need more time before the cremation?',
     answer:
-      'We provide freezer box services for temporary preservation when family members need additional time to arrive or when arrangements require more time to complete. This service is available at your home or at our facility.',
+      'We can provide a freezer box — a preservation unit installed at home or at a facility — for as long as your family needs. This is commonly used when family members are travelling from another city. Contact us and we’ll arrange it immediately.',
     category: 'services',
   },
   {
     id: 'faq-booking',
     question: 'What happens after I submit a booking request?',
     answer:
-      'After you submit a request, our team will contact you within minutes to confirm details, discuss your requirements, and coordinate next steps. You will receive a reference number for your request and a team member will be assigned to assist you.',
+      'Our team calls you back within minutes of receiving your request — any hour of the day or night. We’ll confirm the details, walk you through what happens next, and begin coordinating immediately.',
     category: 'process',
   },
 ];

@@ -15,13 +15,7 @@ import { processSteps } from '@/content/process';
 import { faqs } from '@/content/faq';
 import { valuePrinciples } from '@/content/values';
 import { formatPhoneLink } from '@/lib/utils';
-import {
-  Phone,
-  Clock,
-  Shield,
-  Users,
-  ArrowRight,
-} from 'lucide-react';
+import { Phone, Clock, UserCheck, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
   return (
@@ -31,25 +25,25 @@ export default function HomePage() {
         <Container>
           <div className="max-w-3xl">
             <h1 className="font-display text-3xl md:text-4xl lg:text-[48px] font-semibold text-neutral-900 leading-tight tracking-tight">
-              Clear guidance when your family needs it most
+              Funeral and cremation services, handled with care
             </h1>
             <p className="mt-6 text-lg md:text-xl text-neutral-700 leading-relaxed max-w-2xl">
-              {siteConfig.description}
+              We take care of every arrangement — transportation, cremation, rituals, and post-funeral support — so your family can focus on being together.
             </p>
 
-            {/* Trust signals — inline */}
+            {/* Trust row */}
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-600">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-4 h-4 text-primary-500" aria-hidden="true" />
-                {siteConfig.hours.display}
+                Available any hour
               </span>
               <span className="flex items-center gap-1.5">
-                <Shield className="w-4 h-4 text-primary-500" aria-hidden="true" />
-                Professional coordination
+                <UserCheck className="w-4 h-4 text-primary-500" aria-hidden="true" />
+                One point of contact
               </span>
               <span className="flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-primary-500" aria-hidden="true" />
-                Experienced team
+                <ShieldCheck className="w-4 h-4 text-primary-500" aria-hidden="true" />
+                Transparent process
               </span>
             </div>
 
@@ -57,12 +51,12 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <Link href="/booking">
                 <Button size="lg">
-                  Get immediate assistance
+                  Request assistance now
                 </Button>
               </Link>
               <Link href="/services">
                 <Button variant="secondary" size="lg">
-                  Explore our services
+                  See all services
                 </Button>
               </Link>
             </div>
@@ -75,7 +69,7 @@ export default function HomePage() {
                   href={formatPhoneLink(siteConfig.contact.phone)}
                   className="text-primary-500 font-medium hover:text-primary-700 transition-colors"
                 >
-                  {siteConfig.contact.phoneDisplay}
+                  {siteConfig.contact.phoneDisplayWithHours}
                 </a>
               </p>
             )}
@@ -88,10 +82,10 @@ export default function HomePage() {
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
             {[
-              { icon: Clock, text: 'Available 24/7' },
-              { icon: Phone, text: 'Immediate response' },
-              { icon: Shield, text: 'Transparent process' },
-              { icon: Users, text: 'Experienced team' },
+              { icon: Clock, text: 'Available any hour' },
+              { icon: Phone, text: 'Response within minutes' },
+              { icon: ShieldCheck, text: 'No hidden costs' },
+              { icon: UserCheck, text: 'Dedicated coordinator' },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex flex-col items-center gap-2 py-2">
                 <Icon className="w-5 h-5 text-primary-700" aria-hidden="true" />
@@ -107,11 +101,10 @@ export default function HomePage() {
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 id="services-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
-              Complete funeral and cremation services
+              What we can arrange for your family
             </h2>
             <p className="mt-4 text-base text-neutral-700 leading-relaxed">
-              From initial coordination to post-funeral support, we provide every
-              service your family may need during a difficult time.
+              Every service your family may need, from transportation to post-funeral rituals. We handle the logistics — you focus on your loved one.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -127,10 +120,10 @@ export default function HomePage() {
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 id="process-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
-              How we help your family
+              What happens when you reach out
             </h2>
             <p className="mt-4 text-base text-neutral-700 leading-relaxed">
-              A simple, guided process so you know exactly what to expect at every step.
+              A clear, step-by-step guidance process so you know exactly what to expect.
             </p>
           </div>
           <div className="max-w-3xl mx-auto">
@@ -160,12 +153,12 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── What families value ───────────────────────────── */}
+      {/* ── How we work ───────────────────────────────────── */}
       <section className="py-16 md:py-20 bg-white" aria-labelledby="values-heading">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 id="values-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
-              What families value
+              How we work
             </h2>
             <p className="mt-4 text-base text-neutral-700 leading-relaxed">
               The principles that guide every interaction with every family we serve.
@@ -200,11 +193,11 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
               <h2 id="faq-heading" className="font-display text-2xl md:text-3xl font-semibold text-neutral-900">
-                Frequently asked questions
+                Common questions
               </h2>
             </div>
-            <Accordion type="single" collapsible>
-              {faqs.slice(0, 5).map((faq) => (
+            <Accordion type="single" collapsible defaultValue={faqs[0].id}>
+              {faqs.slice(0, 3).map((faq) => (
                 <AccordionItem key={faq.id} value={faq.id}>
                   <AccordionTrigger>{faq.question}</AccordionTrigger>
                   <AccordionContent>{faq.answer}</AccordionContent>
@@ -228,42 +221,33 @@ export default function HomePage() {
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 id="cta-heading" className="font-display text-2xl md:text-3xl font-semibold text-white">
-              We are here when you need us
+              We&apos;re here. Call us any time.
             </h2>
             <p className="mt-4 text-base text-primary-300 leading-relaxed">
-              Our team is available around the clock to provide guidance and support.
-              Reach out whenever your family needs assistance.
+              If you need help now, call directly — someone will answer. If you&apos;re planning ahead or have questions, fill in the form and we&apos;ll be in touch promptly.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/booking">
-                <Button
-                  size="lg"
-                  className="bg-white text-primary-900 hover:bg-neutral-100 hover:text-primary-900"
-                >
-                  Get assistance now
-                </Button>
-              </Link>
+              {siteConfig.contact.phone && (
+                <a href={formatPhoneLink(siteConfig.contact.phone)}>
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto bg-white text-primary-900 hover:bg-neutral-100 hover:text-primary-900"
+                  >
+                    <Phone className="w-4 h-4 mr-2 inline" />
+                    Call {siteConfig.contact.phoneDisplay}
+                  </Button>
+                </a>
+              )}
               <Link href="/contact">
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="text-white border-primary-300 hover:bg-primary-700 hover:text-white"
+                  className="w-full sm:w-auto text-white border-primary-300 hover:bg-primary-700 hover:text-white"
                 >
-                  Contact us
+                  Send a message
                 </Button>
               </Link>
             </div>
-            {siteConfig.contact.phone && (
-              <p className="mt-6 text-sm text-primary-300">
-                Call directly:{' '}
-                <a
-                  href={formatPhoneLink(siteConfig.contact.phone)}
-                  className="text-white font-medium hover:underline"
-                >
-                  {siteConfig.contact.phoneDisplay}
-                </a>
-              </p>
-            )}
           </div>
         </Container>
       </section>

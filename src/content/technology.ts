@@ -1,10 +1,7 @@
 import type { TechnologySection } from '@/types';
 
 /**
- * Technology content
- *
- * This content uses the progressive disclosure pattern:
- * Simple → Detailed → Technical → Safety
+ * Technology content — progressive disclosure framework
  *
  * IMPORTANT: Sections marked isPlaceholder: true contain
  * placeholder text that MUST be replaced with verified
@@ -48,7 +45,7 @@ export const technologySections: TechnologySection[] = [
 ];
 
 export const technologyIntro = {
-  heading: 'Our approach',
+  heading: 'Why we work this way',
   subheading:
     'Professional methods that give families the time and options they need.',
   description:

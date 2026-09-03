@@ -3,37 +3,37 @@ import type { ProcessStep } from '@/types';
 export const processSteps: ProcessStep[] = [
   {
     step: 1,
-    title: 'Contact Us',
+    title: 'You contact us',
     description:
-      'Reach out by phone or through our website. Our team is available around the clock and will respond promptly to understand your needs.',
+      'Call or fill in the form. We respond immediately — any hour, day or night.',
     icon: 'Phone',
   },
   {
     step: 2,
-    title: 'We Coordinate Arrangements',
+    title: 'We call you back',
     description:
-      'A dedicated team member is assigned to your family. We discuss your requirements, traditions, and preferences in detail.',
+      'A coordinator calls you within minutes to understand exactly what your family needs.',
     icon: 'Users',
   },
   {
     step: 3,
-    title: 'Select Services',
+    title: "We confirm what's needed",
     description:
-      'Choose the services your family needs — from transportation to cremation to post-funeral support. We provide clear information to guide your decisions.',
+      'Your coordinator confirms the services, timing, and location — and gives you a clear picture of what will happen and what it will cost.',
     icon: 'ClipboardList',
   },
   {
     step: 4,
-    title: 'We Handle the Process',
+    title: 'We handle everything',
     description:
-      'Our experienced team manages all logistics with professionalism and care. You are kept informed at every step.',
+      'Transportation, crematorium booking, ritual coordination, materials — all handled by our team. You are told what’s happening at every step.',
     icon: 'ShieldCheck',
   },
   {
     step: 5,
-    title: 'Confirmation and Support',
+    title: 'Continued support',
     description:
-      'You receive confirmation of completed services and continued support for any post-funeral requirements your family may have.',
+      'After cremation, we remain available for asthi visarjan, prayer arrangements, and any other post-funeral needs.',
     icon: 'CheckCircle',
   },
 ];

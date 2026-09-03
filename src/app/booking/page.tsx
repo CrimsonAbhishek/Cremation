@@ -4,8 +4,8 @@ import { BookingForm } from '@/components/booking/BookingForm';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Request Assistance / Booking',
-  description: `Submit a booking request for cremation or funeral arrangements with ${siteConfig.companyName}. Fast 24/7 coordination.`,
+  title: 'Request Assistance',
+  description: `Request assistance for cremation or funeral arrangements with ${siteConfig.companyName}. Fast 24/7 coordination.`,
 };
 
 export default function BookingPage() {
@@ -15,10 +15,10 @@ export default function BookingPage() {
         <Container>
           <div className="max-w-2xl mx-auto text-center">
             <h1 id="booking-heading" className="font-display text-3xl md:text-4xl font-semibold text-neutral-900">
-              Request Assistance
+              Request assistance
             </h1>
             <p className="mt-3 text-base text-neutral-700 leading-relaxed">
-              Complete the steps below to submit a service request. Our coordination team is available around the clock and will contact you immediately upon receipt.
+              Fill in your details and we&apos;ll call you back immediately. Our team is available around the clock.
             </p>
           </div>
         </Container>

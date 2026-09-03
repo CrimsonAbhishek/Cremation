@@ -7,6 +7,8 @@ import { contactFormSchema, type ContactFormValues } from '@/lib/validation/cont
 import { contactService } from '@/lib/services';
 import { FormField, Input, Textarea } from '@/components/ui/FormFields';
 import { Button } from '@/components/ui/Button';
+import { siteConfig } from '@/config/site';
+import { formatPhoneLink } from '@/lib/utils';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export function ContactForm() {
@@ -39,23 +41,28 @@ export function ContactForm() {
         reset();
       } else {
         setStatus('error');
-        setResponseMsg('Unable to submit form. Please try again.');
+        setResponseMsg('We weren’t able to send your message. Please try again — or call us directly.');
       }
     } catch {
       setStatus('error');
-      setResponseMsg('An unexpected error occurred. Please try calling directly.');
+      setResponseMsg('An unexpected error occurred. Please try calling us directly.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       {status === 'success' && (
-        <div className="p-4 bg-success-100 border border-success-600 rounded-sm text-neutral-900 flex gap-3 items-start" role="alert">
-          <CheckCircle2 className="w-5 h-5 text-success-600 shrink-0 mt-0.5" aria-hidden="true" />
-          <div>
-            <p className="font-semibold text-sm">Message Received</p>
-            <p className="text-sm mt-1">{responseMsg}</p>
+        <div className="p-5 bg-success-100 border border-success-600 rounded-sm text-neutral-900 space-y-3" role="alert">
+          <div className="flex items-center gap-2 text-success-600 font-semibold text-base">
+            <CheckCircle2 className="w-5 h-5 shrink-0" aria-hidden="true" />
+            Your message has been received
           </div>
+          <p className="text-sm text-neutral-800 leading-relaxed">
+            We&apos;ll call or email you within the hour. If you need immediate help, call us now at{' '}
+            <a href={formatPhoneLink(siteConfig.contact.phone)} className="font-semibold underline">
+              {siteConfig.contact.phoneDisplay}
+            </a>.
+          </p>
         </div>
       )}
 
@@ -71,7 +78,7 @@ export function ContactForm() {
 
       <fieldset className="border border-neutral-300 rounded-sm p-4">
         <legend className="text-sm font-semibold text-neutral-900 px-2 font-body">
-          How soon do you need assistance? <span className="text-error-600">*</span>
+          How soon do you need help? <span className="text-error-600">*</span>
         </legend>
         <div className="space-y-2 mt-2">
           <label className="flex items-center gap-3 text-sm text-neutral-900 cursor-pointer min-h-[36px]">
@@ -81,7 +88,7 @@ export function ContactForm() {
               {...register('urgency')}
               className="w-4 h-4 text-primary-500 focus:ring-primary-500"
             />
-            Emergency (Immediate assistance required)
+            Emergency — I need help now
           </label>
           <label className="flex items-center gap-3 text-sm text-neutral-900 cursor-pointer min-h-[36px]">
             <input
@@ -90,7 +97,7 @@ export function ContactForm() {
               {...register('urgency')}
               className="w-4 h-4 text-primary-500 focus:ring-primary-500"
             />
-            Today (Assistance needed within 24 hours)
+            Today — within the next 24 hours
           </label>
           <label className="flex items-center gap-3 text-sm text-neutral-900 cursor-pointer min-h-[36px]">
             <input
@@ -99,7 +106,7 @@ export function ContactForm() {
               {...register('urgency')}
               className="w-4 h-4 text-primary-500 focus:ring-primary-500"
             />
-            General inquiry / Planning ahead
+            Planning ahead — no immediate urgency
           </label>
         </div>
         {errors.urgency && (
@@ -107,24 +114,24 @@ export function ContactForm() {
         )}
       </fieldset>
 
-      <FormField label="Full Name" htmlFor="name" required error={errors.name?.message}>
-        <Input id="name" {...register('name')} placeholder="Enter your full name" error={!!errors.name} />
+      <FormField label="Your name" htmlFor="name" required error={errors.name?.message}>
+        <Input id="name" {...register('name')} placeholder="Enter your name" error={!!errors.name} />
       </FormField>
 
-      <FormField label="Phone Number" htmlFor="phone" required error={errors.phone?.message} helperText="10-digit mobile number">
+      <FormField label="Mobile number" htmlFor="phone" required error={errors.phone?.message} helperText="We'll call this number to confirm details">
         <Input id="phone" type="tel" {...register('phone')} placeholder="9876543210" error={!!errors.phone} />
       </FormField>
 
-      <FormField label="Email Address (Optional)" htmlFor="email" error={errors.email?.message}>
+      <FormField label="Email address (optional)" htmlFor="email" error={errors.email?.message}>
         <Input id="email" type="email" {...register('email')} placeholder="yourname@example.com" error={!!errors.email} />
       </FormField>
 
-      <FormField label="Message or Special Requests" htmlFor="message" error={errors.message?.message}>
-        <Textarea id="message" {...register('message')} placeholder="Please describe any specific requirements or questions..." error={!!errors.message} />
+      <FormField label="Message or questions" htmlFor="message" error={errors.message?.message}>
+        <Textarea id="message" {...register('message')} placeholder="Tell us what you need — location, services required, timing, or any questions" error={!!errors.message} />
       </FormField>
 
       <Button type="submit" size="lg" fullWidth isLoading={status === 'submitting'}>
-        Send inquiry
+        Send message
       </Button>
     </form>
   );

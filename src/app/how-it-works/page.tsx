@@ -30,6 +30,9 @@ export default function HowItWorksPage() {
       <section className="py-12 md:py-20 bg-white">
         <Container>
           <div className="max-w-3xl mx-auto">
+            <h2 className="font-display text-2xl font-semibold text-neutral-900 mb-10">
+              What happens when you reach out
+            </h2>
             <div className="space-y-12">
               {processSteps.map((step) => (
                 <div key={step.step} className="flex gap-6 items-start">
@@ -39,9 +42,9 @@ export default function HowItWorksPage() {
                   <div className="pt-1">
                     <div className="flex items-center gap-3 mb-2">
                       <DynamicIcon name={step.icon} className="w-5 h-5 text-primary-500" aria-hidden="true" />
-                      <h2 className="font-display text-2xl font-semibold text-neutral-900">
+                      <h3 className="font-display text-2xl font-semibold text-neutral-900">
                         {step.title}
-                      </h2>
+                      </h3>
                     </div>
                     <p className="text-base text-neutral-700 leading-relaxed">
                       {step.description}
@@ -60,10 +63,10 @@ export default function HowItWorksPage() {
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link href="/booking">
-                  <Button size="lg">Get immediate assistance</Button>
+                  <Button size="lg">Request assistance now</Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="secondary" size="lg">Contact us</Button>
+                  <Button variant="secondary" size="lg">Send a message</Button>
                 </Link>
               </div>
             </div>

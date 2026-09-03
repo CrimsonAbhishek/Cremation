@@ -7,7 +7,7 @@ import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: `Contact ${siteConfig.companyName} for immediate assistance or general inquiries. Available around the clock.`,
+  description: `Get in touch with ${siteConfig.companyName}. Available at any hour for immediate assistance or non-urgent inquiries.`,
 };
 
 export default function ContactPage() {
@@ -17,10 +17,10 @@ export default function ContactPage() {
         <Container>
           <div className="max-w-2xl">
             <h1 id="contact-heading" className="font-display text-3xl md:text-4xl font-semibold text-neutral-900">
-              Contact us
+              Get in touch
             </h1>
             <p className="mt-4 text-lg text-neutral-700 leading-relaxed">
-              We are available around the clock. If you require immediate assistance, please call us directly.
+              If you need help now, call directly — someone will answer. For non-urgent questions, send us a message below and we&apos;ll get back to you promptly.
             </p>
           </div>
         </Container>
@@ -93,14 +93,14 @@ export default function ContactPage() {
               </div>
 
               <div className="bg-primary-900 text-white p-6 rounded-md">
-                <h3 className="font-display text-lg font-semibold mb-2">Emergency Assistance</h3>
+                <h3 className="font-display text-lg font-semibold mb-2">Need Immediate Help?</h3>
                 <p className="text-sm text-primary-100 leading-relaxed mb-4">
-                  If you need immediate coordination for human remains transportation or cremation, calling our 24/7 helpline is the fastest way to receive assistance.
+                  For emergency assistance — hearse, transportation, or immediate cremation coordination — calling is faster. Someone answers any hour.
                 </p>
                 {siteConfig.contact.phone && (
                   <a
                     href={formatPhoneLink(siteConfig.contact.phone)}
-                    className="inline-flex items-center gap-2 font-semibold text-white bg-primary-500 hover:bg-primary-700 px-4 py-2.5 rounded-xs transition-colors"
+                    className="inline-flex items-center gap-2 font-semibold text-white bg-primary-500 hover:bg-primary-700 px-4 py-2.5 rounded-xs transition-colors text-sm"
                   >
                     <Phone className="w-4 h-4" />
                     Call {siteConfig.contact.phoneDisplay}
@@ -112,10 +112,10 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <div className="bg-neutral-50 p-6 md:p-8 rounded-md border border-neutral-200">
                 <h2 className="font-display text-2xl font-semibold text-neutral-900 mb-2">
-                  Send an Inquiry
+                  Send us a message
                 </h2>
                 <p className="text-sm text-neutral-700 mb-6">
-                  Fill out the form below and our team will get in touch with you promptly.
+                  Fill in the form below and we&apos;ll be in touch promptly.
                 </p>
                 <ContactForm />
               </div>

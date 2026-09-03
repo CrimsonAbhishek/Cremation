@@ -7,16 +7,15 @@ import { Menu, X, Phone } from 'lucide-react';
 import { Container } from './Container';
 import { Button } from '@/components/ui/Button';
 import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
-import { formatPhoneLink } from '@/lib/utils';
+import { cn, formatPhoneLink } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/how-it-works', label: 'How It Works' },
-  { href: '/technology', label: 'Our Approach' },
-  { href: '/about', label: 'About' },
-  { href: '/faq', label: 'FAQ' },
+  { href: '/technology', label: 'Why We Work This Way' },
+  { href: '/about', label: 'About Us' },
+  { href: '/faq', label: 'FAQs' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -27,8 +26,6 @@ export function Header() {
   const toggleMobile = useCallback(() => {
     setMobileOpen((prev) => !prev);
   }, []);
-
-
 
   // Close on Escape
   useEffect(() => {
@@ -67,7 +64,7 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -92,14 +89,14 @@ export function Header() {
               <a
                 href={formatPhoneLink(siteConfig.contact.phone)}
                 className="flex items-center gap-2 text-sm font-medium text-neutral-700 hover:text-primary-500 transition-colors"
-                aria-label={`Call ${siteConfig.contact.phoneDisplay}`}
+                aria-label={`Call ${siteConfig.contact.phoneDisplayWithHours}`}
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
-                <span className="hidden xl:inline">{siteConfig.contact.phoneDisplay}</span>
+                <span className="hidden xl:inline">{siteConfig.contact.phoneDisplayWithHours}</span>
               </a>
             )}
             <Link href="/booking">
-              <Button size="md">Get assistance</Button>
+              <Button size="md">Book a service</Button>
             </Link>
           </div>
 
@@ -152,7 +149,7 @@ export function Header() {
 
             <Link href="/booking" onClick={() => setMobileOpen(false)}>
               <Button size="lg" fullWidth>
-                Get assistance
+                Book a service
               </Button>
             </Link>
 
@@ -162,7 +159,7 @@ export function Header() {
                 className="flex items-center justify-center gap-2 py-3 text-base font-medium text-primary-500 hover:text-primary-700 min-h-[48px]"
               >
                 <Phone className="h-5 w-5" aria-hidden="true" />
-                Call {siteConfig.contact.phoneDisplay}
+                Call {siteConfig.contact.phoneDisplayWithHours}
               </a>
             )}
           </nav>

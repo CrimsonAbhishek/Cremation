@@ -2,15 +2,15 @@ import { z } from 'zod';
 
 export const bookingStep1Schema = z.object({
   urgency: z.enum(['emergency', 'today', 'later'], {
-    errorMap: () => ({ message: 'Please select how soon you need assistance' }),
+    errorMap: () => ({ message: 'Please select how soon you need help' }),
   }),
   contactName: z.string().min(1, 'Your name is required').max(100),
   contactPhone: z
     .string()
-    .min(1, 'Phone number is required')
-    .regex(/^[0-9]{10}$/, 'Please enter a valid 10-digit phone number'),
-  contactEmail: z.string().email('Please enter a valid email').optional().or(z.literal('')),
-  contactRelation: z.string().min(1, 'Please specify your relation'),
+    .min(1, 'This field is required.')
+    .regex(/^[0-9]{10}$/, 'Please enter a valid 10-digit mobile number.'),
+  contactEmail: z.string().email('Please enter a valid email address').optional().or(z.literal('')),
+  contactRelation: z.string().min(1, 'Please specify your relation to the deceased'),
 });
 
 export const bookingStep2Schema = z.object({
@@ -18,14 +18,14 @@ export const bookingStep2Schema = z.object({
 });
 
 export const bookingStep3Schema = z.object({
-  locationOfDeceased: z.string().min(1, 'Please provide the current location'),
+  locationOfDeceased: z.string().min(1, 'This field is required.'),
   preferredLocation: z.string().optional().or(z.literal('')),
   preferredDate: z.string().optional().or(z.literal('')),
   preferredTime: z.string().optional().or(z.literal('')),
 });
 
 export const bookingStep4Schema = z.object({
-  deceasedName: z.string().min(1, 'Name of the deceased is required'),
+  deceasedName: z.string().min(1, 'This field is required.'),
   deceasedAge: z.coerce.number().positive().optional().or(z.literal(0)).transform(v => v || undefined),
   specialRequirements: z.string().max(500).optional().or(z.literal('')),
 });
